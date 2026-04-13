@@ -1,0 +1,73 @@
+@charset "UTF 8";
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+html, body{
+    font-family: sans-serif;
+}
+
+html{
+    background-image: url(./imagens/pexels-marcela-toledo-3242608-5610083.jpg);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section{
+    background-color: rgb(0, 217, 255);
+    margin: auto;
+    width: 800px;
+    height: 500px;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+label{
+    font-size: 40px;
+}
+
+div.head{
+    background-color: rgb(1, 120, 141);
+    margin: auto;
+    margin-top: -20px;
+    margin-left: -20px;
+    width: 840px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    height: 30px;
+    text-align: center;
+    font-size: larger;
+    color: white;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+
+input{
+    transform: scale(1.7);
+    vertical-align: 5px;
+}
+
+.img{
+    width: 50%;
+    text-align: right;
+}
+
+img{
+    height: 450px;
+    max-width: 100%;
+    margin-right: -400px;
+    margin-top: -160px;
+    border: 1px  solid black;
+    border-radius: 20px;
+}
