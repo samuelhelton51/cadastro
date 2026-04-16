@@ -1,37 +1,234 @@
 <!DOCTYPE html>
-<html lang="PT-PT">
+<html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastro de Empresas</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f4f6f9;
+}
+header {
+  background: #1e2a38;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+.container {
+  max-width: 800px;
+  margin: 30px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+h2 {
+  margin-bottom: 15px;
+}
+label {
+  display: block;
+  margin-top: 10px;
+}
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.radio-group {
+  margin-top: 10px;
+}
+.radio-group label {
+  display: inline-block;
+  margin-right: 15px;
+}
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.next {
+  background: #007bff;
+  color: white;
+}
+.prev {
+  background: #6c757d;
+  color: white;
+}
+@media (max-width: 600px) {
+  .container {
+    margin: 10px;
+  }
+}
+</style>
 </head>
 <body>
-    <section>
+<header>
+  <h1>Cadastro de Empresas</h1>
+</header>
 
-        <div>EMPRESA</div>
+<div class="container">
+  <form id="formulario">
 
-        <form action="" method="post">
+    <!-- Página 1 -->
+    <div class="page">
+      <h2>Empresa</h2>
+      <label>Denominação fiscal</label>
+      <input type="text" name="denominacaoFiscal">
 
-            <label for="idenf">Denominação fiscal:</label>
-            <input type="text" id="idenf">
+      <label>NIF</label>
+      <input type="text" name="nif">
 
-            <label for="inif">NIF:</label>
-            <input type="text" id="inif">
+      <label>Denominação comercial</label>
+      <input type="text" name="denominacaoComercial">
 
-            <label for="idenc">Denominação comercial:</label>
-            <input type="text" id="idenc">
+      <label>Objetivo social</label>
+      <input type="text" name="objetivo">
 
-            <label for="iobjt">Objetivo social/Tipo de actividade:</label>
-            <input type="text" id="iobjt">
+      <label>Início de Actividade</label>
+      <input type="date" name="inicio">
 
-            <label for="iini">Início de atividade:</label>
-            <input type="text" id="iini">
+      <label>Localização</label>
+      <input type="text" name="localizacao">
 
-            <label for="ilocal"> Localização:</label>
-            <input type="text" id="ilocal">
+      <label>Email</label>
+      <input type="email" name="email">
+    </div>
 
-        </form>
-    </section>
+    <!-- Página 2 -->
+    <div class="page" style="display:none;">
+      <h2>Tipologia da empresa</h2>
+      <div class="radio-group">
+        <label><input type="radio" name="tipologia" value="Unipessoal"> Unipessoal</label>
+        <label><input type="radio" name="tipologia" value="Por quotas"> Por quotas</label>
+        <label><input type="radio" name="tipologia" value="Anonima"> Anónima</label>
+      </div>
+    </div>
+
+    <!-- Página 3 -->
+    <div class="page" style="display:none;">
+      <h2>Representação legal</h2>
+      <label>Nome</label>
+      <input type="text" name="nome">
+
+      <label>Documento</label>
+      <input type="text" name="documento">
+
+      <label>Contacto</label>
+      <input type="text" name="contacto">
+    </div>
+
+    <!-- Página 4 -->
+    <div class="page" style="display:none;">
+      <h2>Recursos Humanos</h2>
+      <label>Total de trabalhadores</label>
+      <input type="number" name="total">
+
+      <label>Nacionais</label>
+      <input type="number" name="nacionais">
+
+      <label>Estrangeiros</label>
+      <input type="number" name="estrangeiros">
+    </div>
+
+    <!-- Página 5 -->
+    <div class="page" style="display:none;">
+      <h2>Obrigação com Trabalhadores</h2>
+      <label>Segurança Social</label>
+      <select name="seguranca_social">
+        <option>Sim</option>
+        <option>Não</option>
+      </select>
+
+      <label>IRT</label>
+      <select name="irt">
+        <option>Sim</option>
+        <option>Não</option>
+      </select>
+    </div>
+
+    <!-- Página 6 -->
+    <div class="page" style="display:none;">
+      <h2>Serviços Públicos</h2>
+      <label>EPAL</label>
+      <select name="epal"><option>Sim</option><option>Não</option></select>
+
+      <label>ENDE</label>
+      <select name="ende"><option>Sim</option><option>Não</option></select>
+
+      <label>Resíduos sólidos</label>
+      <select name="residuos"><option>Sim</option><option>Não</option></select>
+
+      <label>ELISAL</label>
+      <select name="elisal"><option>Sim</option><option>Não</option></select>
+
+      <label>VISTA</label>
+      <select name="vista"><option>Sim</option><option>Não</option></select>
+    </div>
+
+    <!-- Página 6 -->
+    <div class="page" style="display:none;">
+      <h2>Imóvel</h2>
+      <div class="radio-group">
+        <label><input type="radio" name="imovel" value="Proprio"> Próprio</label>
+        <label><input type="radio" name="imovel" value="Renda"> Renda</label>
+      </div>
+    </div>
+
+    <!-- Página 7 -->
+    <div class="page" style="display:none;">
+      <h2>Tipo de comércio</h2>
+      <div class="radio-group">
+        <label><input type="radio" name="comercio" value="Importacao"> Importação</label>
+        <label><input type="radio" name="comercio" value="Grosso"> Grosso</label>
+        <label><input type="radio" name="comercio" value="Retalho"> Retalho</label>
+        <label><input type="radio" name="comercio" value="Servicos"> Prestação de serviços</label>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button type="button" class="prev" onclick="prevPage()">Anterior</button>
+      <button type="button" class="next" onclick="nextPage()">Próximo</button>
+    </div>
+
+  </form>
+</div>
+
+<script>
+let currentPage = 0;
+const pages = document.querySelectorAll('.page');
+
+function showPage(index) {
+  pages.forEach((p, i) => {
+    p.style.display = i === index ? 'block' : 'none';
+  });
+}
+
+function nextPage() {
+  if (currentPage < pages.length - 1) {
+    currentPage++;
+    showPage(currentPage);
+  }
+}
+
+function prevPage() {
+  if (currentPage > 0) {
+    currentPage--;
+    showPage(currentPage);
+  }
+}
+
+showPage(currentPage);
+</script>
+
 </body>
 </html>
