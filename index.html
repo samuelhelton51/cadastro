@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cadastro de Empresas</title>
+
 <style>
 body {
   font-family: Arial, sans-serif;
@@ -24,13 +25,9 @@ header {
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
-h2 {
-  margin-bottom: 15px;
-}
-label {
-  display: block;
-  margin-top: 10px;
-}
+h2 { margin-bottom: 15px; }
+label { display: block; margin-top: 10px; }
+
 input, select {
   width: 100%;
   padding: 10px;
@@ -38,186 +35,285 @@ input, select {
   border-radius: 5px;
   border: 1px solid #ccc;
 }
-.radio-group {
-  margin-top: 10px;
-}
+
+.radio-group { margin-top: 10px; }
 .radio-group label {
   display: inline-block;
   margin-right: 15px;
 }
+
 .buttons {
   margin-top: 20px;
   display: flex;
   justify-content: space-between;
 }
+
 button {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
-.next {
-  background: #007bff;
-  color: white;
-}
-.prev {
-  background: #6c757d;
-  color: white;
-}
+
+.next { background: #007bff; color: white; }
+.prev { background: #6c757d; color: white; }
+
 @media (max-width: 600px) {
-  .container {
-    margin: 10px;
-  }
+  .container { margin: 10px; }
 }
 </style>
 </head>
+
 <body>
+
 <header>
   <h1>Cadastro de Empresas</h1>
 </header>
 
 <div class="container">
-  <form id="formulario">
+<form id="formulario">
 
-    <!-- Página 1 -->
-    <div class="page">
-      <h2>Empresa</h2>
-      <label>Denominação fiscal</label>
-      <input type="text" name="denominacaoFiscal">
+<!-- Página 1 -->
+<div class="page">
+  <h2>Empresa</h2>
+  <input type="text" name="denominacaoFiscal" placeholder="Denominação fiscal" required>
+  <input type="text" name="nif" placeholder="NIF" required>
+  <input type="text" name="denominacaoComercial" placeholder="Denominação comercial" required>
+  <input type="text" name="objetivo" placeholder="Objetivo social" required>
+  <input type="date" name="inicio" required>
+  <input type="text" name="localizacao" placeholder="Localização" required>
+  <input type="email" name="email" placeholder="Email" required>
+</div>
 
-      <label>NIF</label>
-      <input type="text" name="nif">
+<!-- Página 2 -->
+<div class="page" style="display:none;">
+  <h2>Tipologia</h2>
+  <div class="radio-group">
+    <label><input type="radio" name="tipologia" value="Unipessoal" required> Unipessoal</label>
+    <label><input type="radio" name="tipologia" value="Por quotas"> Por quotas</label>
+    <label><input type="radio" name="tipologia" value="Anonima"> Anónima</label>
+  </div>
+</div>
 
-      <label>Denominação comercial</label>
-      <input type="text" name="denominacaoComercial">
+<!-- Página 3 -->
+<div class="page" style="display:none;">
+  <h2>Representação legal</h2>
+  <input type="text" name="nome" placeholder="Nome" required>
+  <input type="file" name="documento" accept=".pdf" required>
+  <input type="text" name="contacto" placeholder="Contacto" required>
+</div>
 
-      <label>Objetivo social</label>
-      <input type="text" name="objetivo">
+<!-- Página 4 -->
+<div class="page" style="display:none;">
+  <h2>Recursos Humanos</h2>
 
-      <label>Início de Actividade</label>
-      <input type="date" name="inicio">
+  <h4>Nacionais</h4>
+  <input type="number" name="nacionais_m" placeholder="Masculino" required>
+  <input type="number" name="nacionais_f" placeholder="Feminino" required>
 
-      <label>Localização</label>
-      <input type="text" name="localizacao">
+  <h4>Estrangeiros</h4>
+  <input type="number" name="estrangeiros_m" placeholder="Masculino" required>
+  <input type="number" name="estrangeiros_f" placeholder="Feminino" required>
 
-      <label>Email</label>
-      <input type="email" name="email">
-    </div>
+  <h4>Totais (calculado automaticamente)</h4>
 
-    <!-- Página 2 -->
-    <div class="page" style="display:none;">
-      <h2>Tipologia da empresa</h2>
-      <div class="radio-group">
-        <label><input type="radio" name="tipologia" value="Unipessoal"> Unipessoal</label>
-        <label><input type="radio" name="tipologia" value="Por quotas"> Por quotas</label>
-        <label><input type="radio" name="tipologia" value="Anonima"> Anónima</label>
-      </div>
-    </div>
+<div style="margin-top:10px;">
+  <label>Total de Nacionais</label>
+  <input type="number" id="total_nacionais" readonly>
+</div>
 
-    <!-- Página 3 -->
-    <div class="page" style="display:none;">
-      <h2>Representação legal</h2>
-      <label>Nome</label>
-      <input type="text" name="nome">
+<div style="margin-top:10px;">
+  <label>Total de Estrangeiros</label>
+  <input type="number" id="total_estrangeiros" readonly>
+</div>
 
-      <label>Documento</label>
-      <input type="text" name="documento">
+<div style="margin-top:10px;">
+  <label><strong>Total Geral</strong></label>
+  <input type="number" id="total_geral" readonly style="font-weight:bold; background:#eef;">
+</div>
+</div>
 
-      <label>Contacto</label>
-      <input type="text" name="contacto">
-    </div>
+<!-- Página 5 -->
+<div class="page" style="display:none;">
+  <h2>Obrigações</h2>
+  <h3>Segurança Social</h3>
+  <select name="seguranca_social" required>
+    <option>Não</option>
+    <option>Sim</option>
+  </select>
+  <h3>IRT</h3>
+  <select name="irt" required>
+    <option>Não</option>
+    <option>Sim</option>
+  </select>
+</div>
 
-    <!-- Página 4 -->
-    <div class="page" style="display:none;">
-      <h2>Recursos Humanos</h2>
-      <label>Total de trabalhadores</label>
-      <input type="number" name="total">
+<!-- Página 6 -->
+<div class="page" style="display:none;">
+  <h2>Serviços Públicos</h2>
+  <h3>EPAL</h3>
+  <select name="epal" required><option>Não</option><option>Sim</option></select>
+  <h3>ENDE</h3>
+  <select name="ende" required><option>Não</option><option>Sim</option></select>
+  <h3>Resíduos</h3>
+  <select name="residuos" required><option>Não</option><option>Sim</option></select>
+  <h3>ELISAL</h3>
+  <select name="elisal" required><option>Não</option><option>Sim</option></select>
+  <h3>VISTA</h3>
+  <select name="vista" required><option>Não</option><option>Sim</option></select>
+</div>
 
-      <label>Nacionais</label>
-      <input type="number" name="nacionais">
+<!-- Página 7 -->
+<div class="page" style="display:none;">
+  <h2>Imóvel</h2>
+  <div class="radio-group">
+    <label><input type="radio" name="imovel" value="Proprio" required> Próprio</label>
+    <label><input type="radio" name="imovel" value="Renda"> Renda</label>
+  </div>
+</div>
 
-      <label>Estrangeiros</label>
-      <input type="number" name="estrangeiros">
-    </div>
+<!-- Página 8 -->
+<div class="page" style="display:none;">
+  <h2>Atividade</h2>
+  <div class="radio-group">
+    <label><input type="radio" name="comercio" value="Importacao" required> Importação</label>
+    <label><input type="radio" name="comercio" value="Grosso"> Grosso</label>
+    <label><input type="radio" name="comercio" value="Retalho"> Retalho</label>
+    <label><input type="radio" name="comercio" value="Servicos"> Serviços</label>
+  </div>
+</div>
 
-    <!-- Página 5 -->
-    <div class="page" style="display:none;">
-      <h2>Obrigação com Trabalhadores</h2>
-      <label>Segurança Social</label>
-      <select name="seguranca_social">
-        <option>Sim</option>
-        <option>Não</option>
-      </select>
+<div class="buttons">
+  <button type="button" class="prev" id="prevBtn" onclick="prevPage()">Anterior</button>
+  <button type="button" class="next" id="nextBtn" onclick="nextPage()">Próximo</button>
+</div>
 
-      <label>IRT</label>
-      <select name="irt">
-        <option>Sim</option>
-        <option>Não</option>
-      </select>
-    </div>
-
-    <!-- Página 6 -->
-    <div class="page" style="display:none;">
-      <h2>Serviços Públicos</h2>
-      <label>EPAL</label>
-      <select name="epal"><option>Sim</option><option>Não</option></select>
-
-      <label>ENDE</label>
-      <select name="ende"><option>Sim</option><option>Não</option></select>
-
-      <label>Resíduos sólidos</label>
-      <select name="residuos"><option>Sim</option><option>Não</option></select>
-
-      <label>ELISAL</label>
-      <select name="elisal"><option>Sim</option><option>Não</option></select>
-
-      <label>VISTA</label>
-      <select name="vista"><option>Sim</option><option>Não</option></select>
-    </div>
-
-    <!-- Página 6 -->
-    <div class="page" style="display:none;">
-      <h2>Imóvel</h2>
-      <div class="radio-group">
-        <label><input type="radio" name="imovel" value="Proprio"> Próprio</label>
-        <label><input type="radio" name="imovel" value="Renda"> Renda</label>
-      </div>
-    </div>
-
-    <!-- Página 7 -->
-    <div class="page" style="display:none;">
-      <h2>Tipo de comércio</h2>
-      <div class="radio-group">
-        <label><input type="radio" name="comercio" value="Importacao"> Importação</label>
-        <label><input type="radio" name="comercio" value="Grosso"> Grosso</label>
-        <label><input type="radio" name="comercio" value="Retalho"> Retalho</label>
-        <label><input type="radio" name="comercio" value="Servicos"> Prestação de serviços</label>
-      </div>
-    </div>
-
-    <div class="buttons">
-      <button type="button" class="prev" onclick="prevPage()">Anterior</button>
-      <button type="button" class="next" onclick="nextPage()">Próximo</button>
-    </div>
-
-  </form>
+</form>
 </div>
 
 <script>
 let currentPage = 0;
 const pages = document.querySelectorAll('.page');
+const nextBtn = document.getElementById("nextBtn");
+const prevBtn = document.getElementById("prevBtn");
+prevBtn.style.display = "none";
 
 function showPage(index) {
   pages.forEach((p, i) => {
     p.style.display = i === index ? 'block' : 'none';
   });
+
+  // botão anterior (CORRETO)
+  if (index === 0) {
+    prevBtn.style.display = "none";
+  } else {
+    prevBtn.style.display = "inline-block";
+  }
+
+  // texto do botão próximo
+  nextBtn.textContent = (index === pages.length - 1) ? "Finalizar" : "Próximo";
 }
 
-function nextPage() {
-  if (currentPage < pages.length - 1) {
-    currentPage++;
-    showPage(currentPage);
+async function nextPage() {
+  const fields = pages[currentPage].querySelectorAll("input, select");
+
+  for (let field of fields) {
+    if (!field.checkValidity()) {
+      field.reportValidity();
+      return;
+    }
   }
+
+  const radios = pages[currentPage].querySelectorAll("input[type='radio']");
+  if (radios.length > 0) {
+    const names = [...new Set([...radios].map(r => r.name))];
+
+    for (let name of names) {
+      const group = pages[currentPage].querySelectorAll(`input[name="${name}"]`);
+      const checked = [...group].some(r => r.checked);
+
+      if (!checked) {
+        alert("Seleciona uma opção antes de continuar.");
+        return;
+      }
+    }
+  }
+
+  if (currentPage === pages.length - 1) {
+
+  const form = document.getElementById("formulario");
+  const formData = new FormData(form);
+  const file = formData.get("documento");
+
+  // PDF em base64
+  const fileBase64 = await new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result.split(",")[1]);
+  });
+
+  // Cálculos
+  const nm = parseInt(formData.get("nacionais_m")) || 0;
+  const nf = parseInt(formData.get("nacionais_f")) || 0;
+  const em = parseInt(formData.get("estrangeiros_m")) || 0;
+  const ef = parseInt(formData.get("estrangeiros_f")) || 0;
+
+  const totalM = nm + em;
+  const totalF = nf + ef;
+  const totalG = totalM + totalF;
+
+  // ENVIAR TUDO PARA O APPS SCRIPT
+  await fetch("https://script.google.com/macros/s/AKfycbxOiR8S4jtq6CXOnqrcYq4OTM82nfTlczNEgJcRBqxzLigALotLPaI2YJ8KPa9mp12eYg/exec", {
+    method: "POST",
+    body: JSON.stringify({
+      denominacaoFiscal: formData.get("denominacaoFiscal"),
+      nif: formData.get("nif"),
+      denominacaoComercial: formData.get("denominacaoComercial"),
+      objetivoSocial: formData.get("objetivo"),
+      dataInicio: formData.get("inicio"),
+      localizacao: formData.get("localizacao"),
+      email: formData.get("email"),
+
+      tipologia: formData.get("tipologia"),
+      nome: formData.get("nome"),
+      contacto: formData.get("contacto"),
+
+      pdfBase64: fileBase64,
+      pdfNome: file.name,
+
+      nacionaisM: nm,
+      nacionaisF: nf,
+      estrangeirosM: em,
+      estrangeirosF: ef,
+
+      totalM,
+      totalF,
+      totalG,
+
+      segurancaSocial: formData.get("seguranca_social"),
+      irt: formData.get("irt"),
+      epal: formData.get("epal"),
+      ende: formData.get("ende"),
+      residuos: formData.get("residuos"),
+      elisal: formData.get("elisal"),
+      vista: formData.get("vista"),
+
+      imovel: formData.get("imovel"),
+      tipoAtividade: formData.get("comercio")
+    })
+  });
+
+  alert("Formulário enviado com sucesso!");
+
+  form.reset();
+  currentPage = 0;
+  showPage(currentPage);
+  return;
+}
+  
+
+  currentPage++;
+  showPage(currentPage);
 }
 
 function prevPage() {
@@ -228,6 +324,33 @@ function prevPage() {
 }
 
 showPage(currentPage);
+
+function calcularTotais() {
+  const nm = parseInt(document.querySelector('[name="nacionais_m"]')?.value) || 0;
+  const nf = parseInt(document.querySelector('[name="nacionais_f"]')?.value) || 0;
+  const em = parseInt(document.querySelector('[name="estrangeiros_m"]')?.value) || 0;
+  const ef = parseInt(document.querySelector('[name="estrangeiros_f"]')?.value) || 0;
+
+  const totalNacionais = nm + nf;
+  const totalEstrangeiros = em + ef;
+  const totalGeral = totalNacionais + totalEstrangeiros;
+
+  document.getElementById("total_nacionais").value = totalNacionais;
+  document.getElementById("total_estrangeiros").value = totalEstrangeiros;
+  document.getElementById("total_geral").value = totalGeral;
+}
+
+// ativa o cálculo sempre que escrever
+document.addEventListener("input", function(e) {
+  if (
+    e.target.name === "nacionais_m" ||
+    e.target.name === "nacionais_f" ||
+    e.target.name === "estrangeiros_m" ||
+    e.target.name === "estrangeiros_f"
+  ) {
+    calcularTotais();
+  }
+});
 </script>
 
 </body>
